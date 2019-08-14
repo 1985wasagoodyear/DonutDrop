@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Game View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="DDGameViewController" customModule="DonutDrop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="DMG-xa-9DA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="605"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnR-2G-k4u">
+                                <rect key="frame" x="262.5" y="40" width="75.5" height="38.5"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="35"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="2" height="3"/>
+                            </label>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redX.png" translatesAutoresizingMaskIntoConstraints="NO" id="zik-9k-d4I">
+                                <rect key="frame" x="540" y="40" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="G0X-Xu-t58"/>
+                                    <constraint firstAttribute="height" constant="50" id="mZw-bk-Vwm"/>
+                                </constraints>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redX.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Rt-sf-uhI">
+                                <rect key="frame" x="540" y="92" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BfK-iH-dmd"/>
+                                    <constraint firstAttribute="width" constant="50" id="aft-w8-Cgz"/>
+                                </constraints>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redX.png" translatesAutoresizingMaskIntoConstraints="NO" id="1hc-cv-wia">
+                                <rect key="frame" x="540" y="144" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="2k3-sL-phu"/>
+                                    <constraint firstAttribute="height" constant="50" id="8ZH-U4-vsU"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DMG-xa-9DA" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" constant="5" id="1YT-c6-PER"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="MnR-2G-k4u" secondAttribute="top" constant="-20" id="22g-t6-cBG"/>
+                            <constraint firstItem="1hc-cv-wia" firstAttribute="top" secondItem="1Rt-sf-uhI" secondAttribute="bottom" constant="2" id="4tA-OE-ada"/>
+                            <constraint firstItem="1hc-cv-wia" firstAttribute="leading" secondItem="1Rt-sf-uhI" secondAttribute="leading" id="6AF-1M-e8e"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="zik-9k-d4I" secondAttribute="top" constant="-20" id="B2b-p3-oUf"/>
+                            <constraint firstItem="MnR-2G-k4u" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CaS-jq-S1G"/>
+                            <constraint firstItem="DMG-xa-9DA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Nyy-9i-B4v"/>
+                            <constraint firstItem="DMG-xa-9DA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Tq1-Ly-WSS"/>
+                            <constraint firstItem="1Rt-sf-uhI" firstAttribute="top" secondItem="zik-9k-d4I" secondAttribute="bottom" constant="2" id="Xdn-gf-REX"/>
+                            <constraint firstItem="1hc-cv-wia" firstAttribute="trailing" secondItem="1Rt-sf-uhI" secondAttribute="trailing" id="YPy-cD-LaN"/>
+                            <constraint firstItem="1Rt-sf-uhI" firstAttribute="trailing" secondItem="zik-9k-d4I" secondAttribute="trailing" id="eyZ-cQ-pxJ"/>
+                            <constraint firstItem="DMG-xa-9DA" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-7.5" id="htV-dw-kwa"/>
+                            <constraint firstItem="zik-9k-d4I" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-10" id="mk1-Ly-JlC"/>
+                            <constraint firstItem="1Rt-sf-uhI" firstAttribute="leading" secondItem="zik-9k-d4I" secondAttribute="leading" id="nw8-47-u3h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="DMG-xa-9DA" id="3XG-Gf-kQF"/>
+                        <outlet property="scoreLabel" destination="MnR-2G-k4u" id="7q4-G2-R9f"/>
+                        <outletCollection property="faultViews" destination="zik-9k-d4I" collectionClass="NSMutableArray" id="lS9-Kk-m0x"/>
+                        <outletCollection property="faultViews" destination="1Rt-sf-uhI" collectionClass="NSMutableArray" id="wAg-uO-VjM"/>
+                        <outletCollection property="faultViews" destination="1hc-cv-wia" collectionClass="NSMutableArray" id="gyH-gg-55z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="42.028985507246382" y="26.116071428571427"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background.jpeg" width="1000" height="1500"/>
+        <image name="redX.png" width="78.5" height="78.5"/>
+    </resources>
+</document>
