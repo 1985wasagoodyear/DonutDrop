@@ -15,7 +15,7 @@ final class DDGameViewController: UIViewController {
     // MARK: - Properties
     
     var donutsCount = 0
-    var donutViews = [DonutView]()
+    var donutViews = [(DonutView, TimeInterval)]()
     var shownDonuts = Set<Int>()
     var isPlaying: Bool = false
     var didShowGameStartAlert = false   // one-time flag
@@ -43,7 +43,7 @@ final class DDGameViewController: UIViewController {
     func setupUI() {
         scoreLabel.text = "0"
         faultViews.forEach { $0.isHidden = true }
-        donutViews.forEach { $0.removeFromSuperview() }
+        donutViews.forEach { $0.0.removeFromSuperview() }
     }
     
     func makeAndFireDonut() {
@@ -60,35 +60,40 @@ final class DDGameViewController: UIViewController {
             newDonut.isUserInteractionEnabled = true
             newDonut.tag = donutsCount
             donutsCount += 1
-            donutViews.append(newDonut)
-            fireDonutHelper(newDonut)
+            let timeMultiplier = DONUT_VELOCITY / Int.random(in: 1...5)
+            let donut = (newDonut, timeMultiplier)
+            donutViews.append(donut)
+            fireDonutHelper(donut)
         }
         else {
-            let donut = donutViews[i]
+            var donut = donutViews[i]
+            let timeMultiplier = DONUT_VELOCITY / Int.random(in: 1...5)
+            donut.1 = timeMultiplier
+            donutViews[i] = donut
             fireDonutHelper(donut)
         }
     }
     
-    func fireDonutHelper(_ donut: DonutView) {
-        shownDonuts.insert(donut.tag)
-        donut.transform = .identity
+    func fireDonutHelper(_ donut: (DonutView, TimeInterval)) {
+        shownDonuts.insert(donut.0.tag)
+        donut.0.transform = .identity
         // choose initial direction
         let size = view.frame.size
         let w1 = Int.random(in: -Int(DONUT_WIDTH/2)...Int(size.width - DONUT_WIDTH/2))
         let frame = CGRect(x: Double(w1), y: -DONUT_WIDTH,
                            width: DONUT_WIDTH, height: DONUT_WIDTH)
-        donut.frame = frame
-        view.addSubview(donut)
+        donut.0.frame = frame
+        view.addSubview(donut.0)
         let transform = CGAffineTransform(translationX: 0.0,
                                           y: size.height + DONUT_WIDTH)
-        UIView.animate(withDuration: DONUT_VELOCITY,
+        UIView.animate(withDuration: donut.1,
                        delay: .zero,
                        options: .allowUserInteraction, animations: {
-                        donut.transform = transform
+                        donut.0.transform = transform
         }) { (completed) in
             if completed == true {
                 if self.isPlaying == true {
-                    self.removeDonut(donut.tag, didScore: false)
+                    self.removeDonut(donut.0.tag, didScore: false)
                 }
             }
         }
@@ -99,7 +104,7 @@ final class DDGameViewController: UIViewController {
         let touchLocation = touch.location(in: self.view)
         
         for id in shownDonuts {
-            if donutViews[id].layer.presentation()!.frame.contains(touchLocation) {
+            if donutViews[id].0.layer.presentation()!.frame.contains(touchLocation) {
                 removeDonut(id, didScore: true)
             }
         }
@@ -108,7 +113,7 @@ final class DDGameViewController: UIViewController {
     func removeDonut(_ id: Int, didScore: Bool) {
         if shownDonuts.contains(id) {
             shownDonuts.remove(id)
-            donutViews[id].removeFromSuperview()
+            donutViews[id].0.removeFromSuperview()
         }
         if didScore == false {
             scoreService.didMiss()
@@ -159,9 +164,9 @@ final class DDGameViewController: UIViewController {
 extension DDGameViewController: DonutGameUIDelegate {
     
     func startGame() {
-        setupUI()
+        scoreService.setup()
         isPlaying = true
-        timer = Timer.scheduledTimer(withTimeInterval: 2.0,
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0,
                                      repeats: true,
                                      block: { (timer) in
                                         guard timer.isValid == true else { return }
@@ -174,7 +179,7 @@ extension DDGameViewController: DonutGameUIDelegate {
         timer.invalidate()
         view.layer.removeAllAnimations()
         donutViews.forEach {
-            $0.layer.removeAllAnimations()
+            $0.0.layer.removeAllAnimations()
         }
         shownDonuts.removeAll(keepingCapacity: true)
         stopGame(score ?? 0)

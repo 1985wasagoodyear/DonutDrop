@@ -30,6 +30,7 @@ final class DonutGameScoreViewModel {
     
     var errorCount = 0 {
         didSet {
+            if errorCount == 0 { return }
             if errorCount <= 3 {
                 delegate.showError(for: errorCount - 1)
             }
