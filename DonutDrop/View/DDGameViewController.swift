@@ -2,6 +2,8 @@ import UIKit
 
 private let DONUT_WIDTH = DonutConstants.DONUT_WIDTH
 private let DONUT_VELOCITY = DonutConstants.DONUT_VELOCITY
+private let DROP_INTERVAL: TimeInterval = 1.0 / 2.25
+
 typealias DonutView = UIImageView
 
 final class DDGameViewController: UIViewController {
@@ -166,7 +168,7 @@ extension DDGameViewController: DonutGameUIDelegate {
     func startGame() {
         scoreService.setup()
         isPlaying = true
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0,
+        timer = Timer.scheduledTimer(withTimeInterval: DROP_INTERVAL,
                                      repeats: true,
                                      block: { (timer) in
                                         guard timer.isValid == true else { return }
